@@ -1,0 +1,14 @@
+import Header from "./components/shared/Header";
+
+export default function Layout({ children }) {
+
+    return (
+        <>
+            <Header />
+            {children}
+            <footer>
+                footer
+            </footer>
+        </>
+    )
+}
