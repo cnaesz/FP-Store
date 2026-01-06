@@ -1,76 +1,55 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import metLogo from '../../assets/met.png';
-import Heart from './heart';
+import React from 'react';
 
-export default function Header() {
-  const navigate = useNavigate();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const menuItems = [
-    { name: 'Home', path: '/' },
-    { name: 'Asia', path: '/asia' },
-    { name: 'Italy', path: '/italy' },
-    { name: 'Japan', path: '/japan' },
-  ];
-
+const Header = () => {
   return (
-    <header className='sticky top-0 z-50 w-full  bg-white shadow-sm my-6'>
-      <div className='container mx-auto flex items-end justify-between px-4 py-5'>
-        {/* Logo */}
-        <div
-          onClick={() => navigate('/')}
-          className='cursor-pointer flex items-center text-2xl font-bold px-10'
-        >
-          <img src={metLogo} alt='Logo' className='h-10 w-10 mr-2 ' />
-        </div>
+    <header className='bg-gradient-to-r from-purple-600 to-blue-500 text-white shadow-lg'>
+      <div className='container mx-auto px-4 py-6'>
+        <div className='flex flex-col md:flex-row justify-between items-center'>
+          <div className='flex items-center space-x-2 mb-4 md:mb-0'>
+            <div className='bg-white p-2 rounded-full float-animation'>
+              <svg className='w-8 h-8 text-purple-600' fill='currentColor' viewBox='0 0 20 20'>
+                <path
+                  fillRule='evenodd'
+                  d='M10 2a4 4 0 00-4 4v4H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 10h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4z'
+                  clipRule='evenodd'
+                />
+              </svg>
+            </div>
+            <div>
+              <h1 className='text-3xl font-bold'>ShopEasy</h1>
+              <p className='text-sm text-purple-100'>Everything you need, delivered easy</p>
+            </div>
+          </div>
 
-        {/* Desktop navs */}
-        <nav className='hidden md:block absolute left-1/2 transform -translate-x-1/2'>
-          <ul className='flex gap-6 justify-center text-xl'>
-            {menuItems.map((item) => (
-              <li key={item.name}>
-                <Link
-                  to={item.path}
-                  className='hover:text-blue-500 transition-colors'
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <div className=' items-end justify-between px-11 pb-0 self-end'>
-          <Heart />
+          <div className='flex items-center space-x-4'>
+            <button className='relative group'>
+              <div className='bg-white text-purple-600 px-4 py-2 rounded-lg font-semibold hover:bg-purple-50 transition duration-300'>
+                <span className='flex items-center'>
+                  <svg
+                    className='w-5 h-5 mr-2'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth='2'
+                      d='M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z'
+                    />
+                  </svg>
+                  Cart
+                  <span className='ml-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center'>
+                    0
+                  </span>
+                </span>
+              </div>
+            </button>
+          </div>
         </div>
-        {/* hamburger mobile menu */}
-        <button
-          className='md:hidden text-xl focus:outline-none'
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? '×' : '☰'}
-        </button>
       </div>
-
-      {/* Mobile dropdown menu */}
-      {mobileMenuOpen && (
-        <div className='md:hidden bg-white border-t py-4 px-4'>
-          <ul className='flex flex-col gap-3 text-right'>
-            {menuItems.map((item) => (
-              <li key={item.name}>
-                <Link
-                  to={item.path}
-                  className='block py-1 text-xl hover:text-blue-500 transition-colors'
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
     </header>
   );
-}
+};
+
+export default Header;
